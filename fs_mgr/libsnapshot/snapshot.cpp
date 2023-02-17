@@ -4251,21 +4251,15 @@ void SnapshotManager::UpdateCowStats(ISnapshotMergeStats* stats) {
         estimated_cow_size += status.estimated_cow_size();
     }
 
+<<<<<<< HEAD
     stats->report()->set_cow_file_size(cow_file_size);
     stats->report()->set_total_cow_size_bytes(total_cow_size);
     stats->report()->set_estimated_cow_size_bytes(estimated_cow_size);
 }
-
-void SnapshotManager::SetMergeStatsFeatures(ISnapshotMergeStats* stats) {
-    auto lock = LockExclusive();
-    if (!lock) return;
-
-    SnapshotUpdateStatus update_status = ReadSnapshotUpdateStatus(lock.get());
-    stats->report()->set_iouring_used(update_status.io_uring_enabled());
-    stats->report()->set_userspace_snapshots_used(update_status.userspace_snapshots());
-    stats->report()->set_xor_compression_used(GetXorCompressionEnabledProperty());
+    stats->set_cow_file_size(cow_file_size);
+    stats->set_total_cow_size_bytes(total_cow_size);
+    stats->set_estimated_cow_size_bytes(estimated_cow_size);
 }
-
 bool SnapshotManager::DeleteDeviceIfExists(const std::string& name,
                                            const std::chrono::milliseconds& timeout_ms) {
     auto start = std::chrono::steady_clock::now();

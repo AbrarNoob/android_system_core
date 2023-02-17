@@ -59,7 +59,6 @@ class SnapshotManagerStub : public ISnapshotManager {
     bool MapAllSnapshots(const std::chrono::milliseconds& timeout_ms) override;
     bool UnmapAllSnapshots() override;
     std::string ReadSourceBuildFingerprint() override;
-    void SetMergeStatsFeatures(ISnapshotMergeStats* stats) override;
 };
 
 }  // namespace android::snapshot
